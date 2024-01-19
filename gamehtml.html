@@ -9,6 +9,7 @@
           let gamecanvas = document.getElementById("gamecanvas");
 
           //Nesahat
+          let drawcanvas=gamecanvas.getContext("2d");
           let findgameplace = function(xm, ym, canvas) { //Najde ve středu obrazovky největší plochu s poměrem xm:ym
             if (canvas.width*xm>canvas.height*ym) {
               return Math.round((canvas.width-(canvas.height/ym*xm))/2),  0,  Math.round(canvas.height/ym*xm),  canvas.height
@@ -16,6 +17,11 @@
               return 0,  Math.round((canvas.height-(canvas.width/xm*ym))/2), canvas.width, (canvas.width/xm*ym)
             }
           }
+          let x,y,w,h = findgameplace(4,3,gamecanvas);
+          drawcanvas.beginPath();
+          drawcanvas.strokeStyle="#ff0000";
+          drawcanvas.rect(x,y,w,h);
+          drawcanvas.Stroke()
           console.log(gamecanvas);
         </script>
     </div>
