@@ -18,7 +18,7 @@
               return [0,  Math.round((canvas.height-(canvas.width/xm*ym))/2), canvas.width, (canvas.width/xm*ym)]
             }
           }
-          let [x,y,w,h] = findgameplace(4,3,gamecanvas);
+          let [x,y,w,h] = findgameplace(8,3,gamecanvas);
           drawcanvas.beginPath();
           drawcanvas.strokeStyle="green";
           drawcanvas.rect(x,y,w,h);
