@@ -13,12 +13,24 @@
           let gamecanvas = document.getElementById("gamecanvas");
 
           //Nesahat
-          let drawcanvas = gamecanvas.getContext("2d");
-          drawcanvas.beginPath();
-          drawcanvas.fillStyle="#fff";
-          drawcanvas.fillRect(0,0,gamecanvas.width,gamecanvas.height);
-          drawcanvas.stroke()
-          console.log(gamecanvas);
+          let relativepos = function(rx,ry) {                              //tato funkce bude brát sořadnice x 0-160 a y 0-90 a vracet skutečné souřadnice
+            return [rx*gamecanvas.width/160, ry*gamecanvas.height/90];    //vrací skutečné x a y
+          }
+          let relativerect = function(rsx,rsy,rex,rey) { //počítá skutečnou pozici a rozměry rectu z relativních souřadnic od do
+            return [rsx*gamecanvas.width/160, rsy*gamecanvas.height/90, (rex*gamecanvas.width/160)-(rsx*gamecanvas.width/160), (rsy*gamecanvas.height/90)-(rey*gamecanvas.height/90)];
+                                                                            //Vrátí skutečné x a y začátku a skutečnou šířku a výšku
+          }
+          let drawcanvas = gamecanvas.getContext("2d");                     //Vrátí plátno na které můžeme kreslit
+          drawcanvas.beginPath();                                           //tímto říkáme, že zahajujeme nějaký styl kreslení a nesaháme na ten posledí
+          drawcanvas.fillStyle="#fff";                                      //nastavíme barvu pozadí
+          drawcanvas.fillRect(0,0,gamecanvas.width,gamecanvas.height);      //nakreslíme bílý obdelník přes celou plochu
+          drawcanvas.stroke();                                              //updatujeme plátno
+
+          let logoimage = new Image();
+          logoimage.src = "./m3jlogo.png";
+          [x,y,w,h] = relativerect(75,40,85,50);
+          drawcanvas.drawImage(logoimage,x,y,w,h);
+          
         </script>
     </div>
     
