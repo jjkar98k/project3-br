@@ -29,7 +29,10 @@
           let logoimage = new Image();
           logoimage.src = "/m3jlogo.png";
           [x,y,w,h] = relativerect(75,40,85,50);
-          drawcanvas.drawImage(logoimage,x,y,w,h);
+          logoimage.onload = function() {
+            console.log(logoimage);
+            drawcanvas.drawImage(logoimage,x,y,w,h);
+          }
           
         </script>
     </div>
