@@ -21,7 +21,7 @@
         gamecanvas.height=900;
         
         //Nesahat
-
+        
         let drawcanvas = gamecanvas.getContext("2d");                     //Vrátí plátno na které můžeme kreslit
         drawcanvas.imageSmoothingEnabled=false;
         let relativepos = function(rx,ry) {                              //tato funkce bude brát sořadnice x 0-160 a y 0-90 a vracet skutečné souřadnice
@@ -32,36 +32,71 @@
                                                                           //Vrátí skutečné x a y začátku a skutečnou šířku a výšku
         }
         
-        drawcanvas.beginPath();                                           //tímto říkáme, že zahajujeme nějaký styl kreslení a nesaháme na ten posledí
-        drawcanvas.fillStyle="#fff";                                      //nastavíme barvu pozadí
-        drawcanvas.fillRect(0,0,drawcanvas.canvas.width,drawcanvas.canvas.height);      //nakreslíme bílý obdelník přes celou plochu
-        drawcanvas.stroke();                                              //updatujeme plátno
+                                                  //updatujeme plátno
 
         
         
         
 
         function update(atime) { //toto se bude volat co nejčastěji to půjde
-          if (window.loadedimgs) {
-            let menubackgroundimg = document.getElementById(idhead+"menubackground");
+          drawcanvas.beginPath();                                           
+          drawcanvas.fillStyle="#fff";                                      
+          drawcanvas.fillRect(0,0,drawcanvas.canvas.width,drawcanvas.canvas.height);      
+          drawcanvas.stroke();    // promazání obrazovky bílou barvou
+          
+          if (window.loadedimgs) {                                                                     // když je vše už načtené = tady buděš pracovat
+            let menubackgroundimg = document.getElementById(idhead+"menubackground"); //pozadí menu
             [x,y,w,h] = relativerect(0,0,160,90);
             drawcanvas.drawImage(menubackgroundimg,x,y,w,h);
+
+            // ...
+
+
+            
           } else {
             let logoimage = document.getElementById(idhead+"m3jlogo");
             [x,y,w,h] = relativerect(70,25,90,45);
             drawcanvas.drawImage(logoimage,x,y,w,h);
+            drawcanvas.beginPath();       //pozadí čárky                                    
+            drawcanvas.fillStyle="#000";   
+            [x,y,w,h] = relativerect(60,50,100,54)
+            drawcanvas.fillRect(x,y,w,h);      
+            drawcanvas.stroke();
+            drawcanvas.beginPath();  // čárka                                         
+            drawcanvas.fillStyle="#0f0";   
+            [x,y,w,h] = relativerect(61,51,61+window.loadedimgsprogress*38,53)
+            drawcanvas.fillRect(x,y,w,h);      
+            drawcanvas.stroke();    
           }
           requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
         
       </script>
-      <img style="display:none" id="bi6yrunner/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAYAAAA5DDySAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF6SURBVGhD7ZnBrcIwDECTfwaxyR+DAwswIwtwYIy/yRfcS9LGyIQ02KlNU9InVQ0cEvvZNQisMaZzV7P0AhzDq8aw1pqfsG4WVgfY0y2s8nTHTVjVje8AkgBInJIYVVLMHNLYAoCnYK9ui+30GZISpy2FLCAGB6sVZFa6EMUCAFLVhDpEg8kCXvDJOuz5qt6+EsgKCMkDXgJQqwxVAT2h9VMz4xNz5B3qAnAX5FikAKhgd9gOz7y7vyA4/FIDdwyq0GIBj+Tjg1ITH73HSSKG0yXUx6tIACUJ6ApNyFUeK5ZjsgC/ae4ATSiFiIljFB2CqYA+LYWLqIAUuSrVIEddwBjc9tWSNZsALrEwKSGLEYABGRISvIDRn8S4bbpUsh1Q0xCTrDxQ/AjM0R0awhc5AyTJzoBWWAWEe7Os/wy5S30I7v72YSXH/+8lrMpR+RRIJSsRLEbqDJKAWquHwTFy9iYLwJuWHobRkAqIC/hm1i9Cjr4DhmWLGHMH48j4rTeqNTUAAAAASUVORK5CYII="></img>
       <script>
-        setTimeout(function() { //kvůli testování zpoždění o 1 sekundu
-          window.loadedimgs=true;
-        }, 1000)
+        imgpaths = ["menubackground"];
+        function getprogress(f) {
+          let lcount=0;
+          let acount = imgpaths.length;
+          imgpaths.forEach(p => {
+            if (document.getElementById(idhead+p)!==null) {
+              if (document.getElementById(idhead+p).complete) {
+                lcount+=1;
+              }
+            }
+          if (lcount==acount) {
+            window.loadedimgsprogress = 1;
+            setTimeout(function(){window.loadedimgs=true},2000);
+          } else {
+            window.loadedimgsprogress = lcount/acount;
+            setTimeout(f,200);
+          }
+          })
+        }
+        getprogress(getprogress);
       </script>
+      <img style="display:none" id="bi6yrunner/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAYAAAA5DDySAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF6SURBVGhD7ZnBrcIwDECTfwaxyR+DAwswIwtwYIy/yRfcS9LGyIQ02KlNU9InVQ0cEvvZNQisMaZzV7P0AhzDq8aw1pqfsG4WVgfY0y2s8nTHTVjVje8AkgBInJIYVVLMHNLYAoCnYK9ui+30GZISpy2FLCAGB6sVZFa6EMUCAFLVhDpEg8kCXvDJOuz5qt6+EsgKCMkDXgJQqwxVAT2h9VMz4xNz5B3qAnAX5FikAKhgd9gOz7y7vyA4/FIDdwyq0GIBj+Tjg1ITH73HSSKG0yXUx6tIACUJ6ApNyFUeK5ZjsgC/ae4ATSiFiIljFB2CqYA+LYWLqIAUuSrVIEddwBjc9tWSNZsALrEwKSGLEYABGRISvIDRn8S4bbpUsh1Q0xCTrDxQ/AjM0R0awhc5AyTJzoBWWAWEe7Os/wy5S30I7v72YSXH/+8lrMpR+RRIJSsRLEbqDJKAWquHwTFy9iYLwJuWHobRkAqIC/hm1i9Cjr4DhmWLGHMH48j4rTeqNTUAAAAASUVORK5CYII="></img>
+      
     </div>
     
   </body>
