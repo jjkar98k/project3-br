@@ -39,6 +39,7 @@
         
 
         function update(atime) { //toto se bude volat co nejčastěji to půjde
+          drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
           drawcanvas.beginPath();                                           
           drawcanvas.fillStyle="#fff";                                      
           drawcanvas.fillRect(0,0,drawcanvas.canvas.width,drawcanvas.canvas.height);      
@@ -48,7 +49,12 @@
             let menubackgroundimg = document.getElementById(idhead+"menubackground"); //pozadí menu
             [x,y,w,h] = relativerect(0,0,160,90);
             drawcanvas.drawImage(menubackgroundimg,x,y,w,h);
+            
+            [x,y,w,h] = relativerect(145,75,160,90);
+            drawcanvas.drawImage(document.getElementById(idhead+"settingsbutton"), x, y, w, h);
 
+            [x,y,w,h] = relativerect(70,40,90,50);
+            drawcanvas.drawImage(document.getElementById(idhead+"mainplaybutton"), x, y, w, h);
             // ...
 
 
@@ -74,7 +80,7 @@
         
       </script>
       <script>
-        imgpaths = ["menubackground"];
+        imgpaths = ["menubackground","settingsbutton","mainplaybutton"];
         function getprogress(f) {
           let lcount=0;
           let acount = imgpaths.length;
@@ -84,19 +90,21 @@
                 lcount+=1;
               }
             }
+          })
           if (lcount==acount) {
             window.loadedimgsprogress = 1;
             setTimeout(function(){window.loadedimgs=true},2000);
           } else {
             window.loadedimgsprogress = lcount/acount;
-            setTimeout(f,200);
+            setTimeout(function(){f(f);},200);
           }
-          })
+          
         }
         getprogress(getprogress);
       </script>
-      <img style="display:none" id="bi6yrunner/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAYAAAA5DDySAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF6SURBVGhD7ZnBrcIwDECTfwaxyR+DAwswIwtwYIy/yRfcS9LGyIQ02KlNU9InVQ0cEvvZNQisMaZzV7P0AhzDq8aw1pqfsG4WVgfY0y2s8nTHTVjVje8AkgBInJIYVVLMHNLYAoCnYK9ui+30GZISpy2FLCAGB6sVZFa6EMUCAFLVhDpEg8kCXvDJOuz5qt6+EsgKCMkDXgJQqwxVAT2h9VMz4xNz5B3qAnAX5FikAKhgd9gOz7y7vyA4/FIDdwyq0GIBj+Tjg1ITH73HSSKG0yXUx6tIACUJ6ApNyFUeK5ZjsgC/ae4ATSiFiIljFB2CqYA+LYWLqIAUuSrVIEddwBjc9tWSNZsALrEwKSGLEYABGRISvIDRn8S4bbpUsh1Q0xCTrDxQ/AjM0R0awhc5AyTJzoBWWAWEe7Os/wy5S30I7v72YSXH/+8lrMpR+RRIJSsRLEbqDJKAWquHwTFy9iYLwJuWHobRkAqIC/hm1i9Cjr4DhmWLGHMH48j4rTeqNTUAAAAASUVORK5CYII="></img>
-      
+      <img style="display:none" id="bi6yrunner/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAIAAAC2bqvFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGISURBVFhH7ZhBlsIgDIaLa6s3mWPMwgvMGecCs/AY3mTs7DEYWiOlAQJI+8ZvUVPfM+TPT6ja6WsHbPeqTKS1CbfIoHaoY6OoQ4QD6vvPRj70195GTRiUMg70fgFYOlMir41SSacC4GXJAVrfo4JBLQlmcKQW08M7QJkqyF/b3xcRAQfmcI0UOZNLvAMeoGKQ9DMU2w/pJDvw4F49AhowaKBE7gARYLhncOak4NgsUcYBYDLBS0VnkhzAjupTb/b9qcc3LdLxdU6FObz4BAds9TSdc+yMt8GaKEFzAvsw0gGmJjTE3uQRaPa8g/BmpAO0Dd5ERWDaRHlaWnwKOYvV0BNDwgzweJv3ClVZT2KWmP2Qr7CYAzKoSKGYeg4kgUoEGsCAHfwqc4hxfyVA9/0OvGwoxb1HEmagki25TVnJDIhpfAoV4F/8L7Rq3g48cbx82kjE78fZRvFknkJOxZIKRmSpuFOoQTtHpqXDSRgHIMv0+YSMI5n6keBy7+dAa+w3UdSwyeu1uwGk3nclKIPuUwAAAABJRU5ErkJggg=="></img>
+      <img style="display:none" id="bi6yrunner/settingsbutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACKSURBVDhPxZNRDoAgDEOHp4QTckylgylgIYofvsQw3NpsoE5E9vQsowaJvHuJc062Ei9zGoQQSnTB3vU0HcwEyLH8aRBj1HXWidXU3A5x1AUVp0OktwCTWsBMkYcBgEGD975EmX5vQPt5BPodWHG9wpiZP75GM2M1Ok+PzT2aH0D7/7+gHeRwBZEDnSyk/v6VQmIAAAAASUVORK5CYII="></img>
+      <img style="display:none" id="bi6yrunner/mainplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAQCAIAAAD4YuoOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACfSURBVDhPtZELDsAgCENl97+zw9SZKsjUbC9ZwvgUrelvRL+cM34OEJFgXKtXDY+I1cH5AlWvUUhkEUuc2dhZ5J5IdV1pbtbYUmuuRVweusGQwSGUIQYvb8CtjObtYpftR17UbXQLih1mHpfgfDu+bbZ0C3QScgNIluWP4qzTsmpRU2Rdjme3iRbwPLAZxq06C2KVXcq9vlVkZr59R0o3pINdF8XkO98AAAAASUVORK5CYII="></img>
     </div>
     
   </body>
