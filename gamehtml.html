@@ -48,12 +48,16 @@
               drawcanvas.fillRect(osx, osy, oex, oey);      
               drawcanvas.stroke();
             }
+            rgbtohex(r, g, b) {
+              let htr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+              return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];
+            }
           }();
   
           
           
           
-  
+          let startmenua=false;
           function update(atime) { //toto se bude volat co nejčastěji to půjde
             drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
             m3jeng.relativerectfill(0,0,160,90,"#fff")
@@ -67,9 +71,21 @@
               //...
               
             } else {
-              m3jeng.relativeimage(document.getElementById(idhead+"m3jlogo"),70,25,90,45);
-              m3jeng.relativerectfill(60,50,100,54,"#000");
-              m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,"#0f0");
+              if (loadedimgsprogress==1) {
+                if (!startmenua) {
+                  startmenua = atime;
+                  
+                }
+                let ap = Math.min((atime-startmenua)/1000,1);
+                m3jeng.relativerectfill(60,50,100,54,"#000");
+                m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,m3jeng.rgbtohex(Math.floor(0+ap*255),Math.floor(255-ap*255),0));
+                m3jeng.relativeimage(document.getElementById(idhead+"m3jlogo"),70,25,90,45);
+                
+              } else {
+                m3jeng.relativeimage(document.getElementById(idhead+"m3jlogo"),70,25,90,45);
+                m3jeng.relativerectfill(60,50,100,54,"#000");
+                m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,"#0f0");
+              }
             }
             requestAnimationFrame(update);
           }
