@@ -52,6 +52,40 @@
               let htr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
               return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];
             }
+            mathmod(a,b) {
+              if ((a%b)>=0){
+                  return a%b
+              }
+              return b+(a%b)
+            }
+            gethexbypos(rx, ry) {
+                let yoffset = 10;
+                let ix = rx - 6.5;
+                let iy = ry - 10 - yoffset;
+                if ((ix>0)&(ix<160)&(iy>0)&(iy<90)) {
+                    let yline = Math.floor(iy/7);
+                    let ye = this.mathmod(iy,7)
+                    let xe = this.mathmod(ix,28);
+                    if (this.mathmod(yline,2)==0) { //řádek, kde je horní část 1. 6tiúhelníku (řádek dělitelný 2)
+                        if (Math.abs(xe-10.5)<(3.5+ye)) { 
+                            return "toto je moje - horní šestiúhelník"
+                        }
+                        else {
+                            return "toto patří jinam"
+                        }
+                        
+                    } else { //řádek, kde je dolní část 1. 6tiúhelníku 
+                        if (Math.abs(xe-10.5)<(3.5+7-ye)) {
+                            return "toto je moje - dolní šestiúhelník"
+                        } else {
+                            return "toto patří jinam"
+                        }
+                    }
+                    
+                } else {
+                    return "miss";
+                }
+            }
           }();
   
           
