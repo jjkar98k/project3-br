@@ -62,23 +62,48 @@
                 let yoffset = 10;
                 let ix = rx - 6.5;
                 let iy = ry - 10 - yoffset;
-                if ((ix>0)&(ix<160)&(iy>0)&(iy<90)) {
+                if ((ix>0)&(ix<160)&(iy>0)&(iy<70)) {
                     let yline = Math.floor(iy/7);
+                    let xline = Math.floor(ix/28)*2;
                     let ye = this.mathmod(iy,7)
                     let xe = this.mathmod(ix,28);
+                   
                     if (this.mathmod(yline,2)==0) { //řádek, kde je horní část 1. 6tiúhelníku (řádek dělitelný 2)
                         if (Math.abs(xe-10.5)<(3.5+ye)) { 
-                            return "toto je moje - horní šestiúhelník"
-                        }
-                        else {
-                            return "toto patří jinam"
+                            return [xline, Math.floor(yline/2)];
+                        } else {
+                            if (xe<=7) {
+                                if ((Math.floor(yline/2)>0)&(xline>0)) {
+                                    return [xline-1,Math.floor(yline/2)-1] //moc vlevo
+                                } else {
+                                    return "miss";
+                                }
+                            } else {
+                                if ((Math.floor(yline/2)>0)&(xline<10)) {
+                                    return [xline+1,Math.floor(yline/2)-1] // moc vpravo
+                                } else {
+                                    return "miss";
+                                }
+                            }
                         }
                         
                     } else { //řádek, kde je dolní část 1. 6tiúhelníku 
                         if (Math.abs(xe-10.5)<(3.5+7-ye)) {
-                            return "toto je moje - dolní šestiúhelník"
+                            return [ xline,Math.floor(yline/2)];
                         } else {
-                            return "toto patří jinam"
+                            if (xe<=7) {
+                                if ((Math.floor(yline/2)<=3)&(xline>0)) {
+                                    return [xline-1,Math.floor(yline/2)] //moc vlevo
+                                } else {
+                                    return "miss";
+                                }
+                            } else {
+                                if ((Math.floor(yline/2)<=3)&(xline<10)) {
+                                    return [xline+1,Math.floor(yline/2)] // moc vpravo
+                                } else {
+                                    return "miss";
+                                }
+                            }
                         }
                     }
                     
