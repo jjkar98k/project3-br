@@ -6,7 +6,7 @@
   <body style="overflow: hidden;background-color:#000">
     
     <div  style="display:flex;width:100%; height:100vh;align-items:center;justify-content:center">
-        <!   //Bigyrunner kód   >
+        <!   //Bi6y Beefast kód  >
     	<canvas id="bi6ybeefast/gamecanvas" style="aspect-ratio:16/9; max-width:100%; max-height:100%; object-fit:contain; background-color:#000000; image-rendering:pixelated"></canvas>
       <img style="display:none" id="bi6ybeefast/m3jlogo" src="data:image/png;base64,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"></img>
       <script>
@@ -48,6 +48,16 @@
               drawcanvas.fillRect(osx, osy, oex, oey);      
               drawcanvas.stroke();
             }
+            relativeline(rsx, rsy, rex, rey, hexcolor="#000", linewidth=0.5) {
+            	let [osx, osy] = this.relativepos(rsx, rsy);
+                let [oex, oey] = this.relativepos(rex, rey);
+            	  drawcanvas.beginPath();
+                drawcanvas.strokeStyle=hexcolor;
+                drawcanvas.lineWidth= linewidth*drawcanvas.canvas.width/160
+                drawcanvas.moveTo(osx, osy);
+                drawcanvas.lineTo(oex, oey);
+                drawcanvas.stroke();
+            }
             rgbtohex(r, g, b) {
               let htr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
               return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];
@@ -57,6 +67,29 @@
                   return a%b
               }
               return b+(a%b)
+            }
+            relativehexdraw(cx, cy, colors) {
+            	let xoffset = 6.5;
+                let yoffset = 20;
+            	if (this.mathmod(cx, 2)==0) {
+                	let bx = xoffset+cx*14
+                    let by = yoffset+cy*14
+                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
+                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
+                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
+                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
+                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
+                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
+                } else {
+                	let bx = xoffset+cx*14
+                    let by = yoffset+cy*14+7
+                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
+                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
+                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
+                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
+                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
+                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
+                }
             }
             gethexbypos(rx, ry) {
                 let yoffset = 10;
@@ -125,7 +158,7 @@
               m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
               m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
               m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
-  			  m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
+  			      m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
               m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
   
   
