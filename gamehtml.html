@@ -148,22 +148,34 @@
   
           
           
-          
+          let game_dir_way="main_menu";
           let startmenua=false;
           function update(atime) { //toto se bude volat co nejčastěji to půjde
             drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
             m3jeng.relativerectfill(0,0,160,90,"#fff")
             
-            if (loadedimgs) {                                                                     // když je vše už načtené = tady buděš pracovat
-              m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
-              m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
-              m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
-  			      m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
-              m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
+            if (loadedimgs) {
+              if (game_dir_way=="main_menu") {
+                m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
+                m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
+                m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
+  			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
+                m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
+              } else if (game_dir_way=="game") {
+                m3jeng.relativerectfill(0,0,160,90,"#050510");
+                m3jeng.relativerectfill(6.5,20,153.5,90,"#050505");
+                for (let x=0; x<10; x++) {
+					        for (let y=0; y<5; y++) {
+                    if ((x%2==0)||(y<4)) {
+                      m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
+                    }
+                  }
+              	}
+              }
   
   
   
-              //...
+              
               
             } else {
               if (loadedimgsprogress==1) {
