@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="user-scalable=no">
+  </head>
+  <body style="overflow: hidden;background-color:#000">
+    
+    <div  style="display:flex;width:100%; height:100vh;align-items:center;justify-content:center">
+        <!   //Bi6y Beefast kód  >
+    	<canvas id="bi6ybeefast/gamecanvas" style="aspect-ratio:16/9; max-width:100%; max-height:100%; object-fit:contain; background-color:#000000; image-rendering:pixelated"></canvas>
+      <img style="display:none" id="bi6ybeefast/m3jlogo" src="data:image/png;base64,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"></img>
+      <script>
+        (function() {
+          
+          //Upravitelné!
+          
+          
+          
+          let idhead = "bi6ybeefast/";
+          let gamecanvas = document.getElementById(idhead+"gamecanvas");
+          gamecanvas.width=1600; //Nastavení kvality na šířku (v pixelech)
+          gamecanvas.height=900;
+          
+          //Nesahat
+          let loadedimgs = false;
+          let loadedimgprogress = 0;
+          let drawcanvas = gamecanvas.getContext("2d");                     //Vrátí plátno na které můžeme kreslit
+          drawcanvas.imageSmoothingEnabled=false;
+  
+          
+          const m3jeng = new class  {
+            constructor() {}
+            relativepos(rx,ry) {                             
+              return [rx*drawcanvas.canvas.width/160, ry*drawcanvas.canvas.height/90];    
+            }
+            relativerect(rsx,rsy,rex,rey) { 
+              return [rsx*drawcanvas.canvas.width/160, rsy*drawcanvas.canvas.height/90, (rex-rsx)*drawcanvas.canvas.width/160, (rey-rsy)*drawcanvas.canvas.height/90];
+                                                                              
+            }
+            relativeimage(img, rsx, rsy, rex, rey) {
+              let [osx, osy, oex, oey] = this.relativerect(rsx, rsy, rex, rey);
+              drawcanvas.drawImage(img, osx, osy, oex, oey);
+            }
+            relativerectfill(rsx, rsy, rex, rey, hexcolor) {
+              let [osx, osy, oex, oey] = this.relativerect(rsx, rsy, rex, rey);
+              drawcanvas.beginPath();                                           
+              drawcanvas.fillStyle=hexcolor;                                      
+              drawcanvas.fillRect(osx, osy, oex, oey);      
+              drawcanvas.stroke();
+            }
+            relativeline(rsx, rsy, rex, rey, hexcolor="#000", linewidth=0.5) {
+            	let [osx, osy] = this.relativepos(rsx, rsy);
+                let [oex, oey] = this.relativepos(rex, rey);
+            	  drawcanvas.beginPath();
+                drawcanvas.strokeStyle=hexcolor;
+                drawcanvas.lineWidth= linewidth*drawcanvas.canvas.width/160
+                drawcanvas.moveTo(osx, osy);
+                drawcanvas.lineTo(oex, oey);
+                drawcanvas.stroke();
+            }
+            rgbtohex(r, g, b) {
+              let htr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+              return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];
+            }
+            mathmod(a,b) {
+              if ((a%b)>=0){
+                  return a%b
+              }
+              return b+(a%b)
+            }
+            relativehexdraw(cx, cy, colors) {
+            	let xoffset = 6.5;
+                let yoffset = 20;
+            	if (this.mathmod(cx, 2)==0) {
+                	let bx = xoffset+cx*14
+                    let by = yoffset+cy*14
+                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
+                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
+                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
+                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
+                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
+                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
+                } else {
+                	let bx = xoffset+cx*14
+                    let by = yoffset+cy*14+7
+                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
+                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
+                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
+                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
+                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
+                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
+                }
+            }
+            gethexbypos(rx, ry) {
+                let yoffset = 10;
+                let ix = rx - 6.5;
+                let iy = ry - 10 - yoffset;
+                if ((ix>0)&(ix<160)&(iy>0)&(iy<70)) {
+                    let yline = Math.floor(iy/7);
+                    let xline = Math.floor(ix/28)*2;
+                    let ye = this.mathmod(iy,7)
+                    let xe = this.mathmod(ix,28);
+                   
+                    if (this.mathmod(yline,2)==0) { //řádek, kde je horní část 1. 6tiúhelníku (řádek dělitelný 2)
+                        if (Math.abs(xe-10.5)<(3.5+ye)) { 
+                            return [xline, Math.floor(yline/2)];
+                        } else {
+                            if (xe<=7) {
+                                if ((Math.floor(yline/2)>0)&(xline>0)) {
+                                    return [xline-1,Math.floor(yline/2)-1] //moc vlevo
+                                } else {
+                                    return "miss";
+                                }
+                            } else {
+                                if ((Math.floor(yline/2)>0)&(xline<10)) {
+                                    return [xline+1,Math.floor(yline/2)-1] // moc vpravo
+                                } else {
+                                    return "miss";
+                                }
+                            }
+                        }
+                        
+                    } else { //řádek, kde je dolní část 1. 6tiúhelníku 
+                        if (Math.abs(xe-10.5)<(3.5+7-ye)) {
+                            return [ xline,Math.floor(yline/2)];
+                        } else {
+                            if (xe<=7) {
+                                if ((Math.floor(yline/2)<=3)&(xline>0)) {
+                                    return [xline-1,Math.floor(yline/2)] //moc vlevo
+                                } else {
+                                    return "miss";
+                                }
+                            } else {
+                                if ((Math.floor(yline/2)<=3)&(xline<10)) {
+                                    return [xline+1,Math.floor(yline/2)] // moc vpravo
+                                } else {
+                                    return "miss";
+                                }
+                            }
+                        }
+                    }
+                    
+                } else {
+                    return "miss";
+                }
+            }
+          }();
+  
+          
+          
+          let game_dir_way="main_menu";
+          let startmenua=false;
+          function update(atime) { //toto se bude volat co nejčastěji to půjde
+            drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
+            m3jeng.relativerectfill(0,0,160,90,"#fff")
+            
+            if (loadedimgs) {
+              if (game_dir_way=="main_menu") {
+                m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
+                m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
+                m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
+  			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
+                m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
+              } else if (game_dir_way=="game") {
+                m3jeng.relativerectfill(0,0,160,90,"#050510");
+                m3jeng.relativerectfill(6.5,20,153.5,90,"#050505");
+                for (let x=0; x<10; x++) {
+					        for (let y=0; y<5; y++) {
+                    if ((x%2==0)||(y<4)) {
+                      m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
+                    }
+                  }
+              	}
+              }
+  
+  
+  
+              
+              
+            } else {
+              if (loadedimgsprogress==1) {
+                if (!startmenua) {
+                  startmenua = atime;
+                  
+                }
+                let ap = Math.min((atime-startmenua)/1000,1);
+                m3jeng.relativerectfill(60,50,100,54,"#000");
+                m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,m3jeng.rgbtohex(Math.floor(0+ap*255),Math.floor(255-ap*255),0));
+                m3jeng.relativeimage(document.getElementById(idhead+"m3jlogo"),70,25,90,45);
+                
+              } else {
+                m3jeng.relativeimage(document.getElementById(idhead+"m3jlogo"),70,25,90,45);
+                m3jeng.relativerectfill(60,50,100,54,"#000");
+                m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,"#0f0");
+              }
+            }
+            requestAnimationFrame(update);
+          }
+          requestAnimationFrame(update);
+          
+        
+          let imgpaths = ["menubackground","settingsbutton","mainplaybutton","easyplaybutton","hardplaybutton"];
+          function getprogress(f) {
+            let lcount=0;
+            let acount = imgpaths.length;
+            imgpaths.forEach(p => {
+              if (document.getElementById(idhead+p)!==null) {
+                if (document.getElementById(idhead+p).complete) {
+                  lcount+=1;
+                }
+              }
+            })
+            if (lcount==acount) {
+              loadedimgsprogress = 1;
+              setTimeout(function(){loadedimgs=true},2000);
+            } else {
+              loadedimgsprogress = lcount/acount;
+              setTimeout(function(){f(f);},200);
+            }
+          }
+          getprogress(getprogress);
+        })();
+        
+      </script>
+      <img style="display:none" id="bi6ybeefast/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAIAAAC2bqvFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGISURBVFhH7ZhBlsIgDIaLa6s3mWPMwgvMGecCs/AY3mTs7DEYWiOlAQJI+8ZvUVPfM+TPT6ja6WsHbPeqTKS1CbfIoHaoY6OoQ4QD6vvPRj70195GTRiUMg70fgFYOlMir41SSacC4GXJAVrfo4JBLQlmcKQW08M7QJkqyF/b3xcRAQfmcI0UOZNLvAMeoGKQ9DMU2w/pJDvw4F49AhowaKBE7gARYLhncOak4NgsUcYBYDLBS0VnkhzAjupTb/b9qcc3LdLxdU6FObz4BAds9TSdc+yMt8GaKEFzAvsw0gGmJjTE3uQRaPa8g/BmpAO0Dd5ERWDaRHlaWnwKOYvV0BNDwgzweJv3ClVZT2KWmP2Qr7CYAzKoSKGYeg4kgUoEGsCAHfwqc4hxfyVA9/0OvGwoxb1HEmagki25TVnJDIhpfAoV4F/8L7Rq3g48cbx82kjE78fZRvFknkJOxZIKRmSpuFOoQTtHpqXDSRgHIMv0+YSMI5n6keBy7+dAa+w3UdSwyeu1uwGk3nclKIPuUwAAAABJRU5ErkJggg=="></img>
+      <img style="display:none" id="bi6ybeefast/settingsbutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACKSURBVDhPxZNRDoAgDEOHp4QTckylgylgIYofvsQw3NpsoE5E9vQsowaJvHuJc062Ei9zGoQQSnTB3vU0HcwEyLH8aRBj1HXWidXU3A5x1AUVp0OktwCTWsBMkYcBgEGD975EmX5vQPt5BPodWHG9wpiZP75GM2M1Ok+PzT2aH0D7/7+gHeRwBZEDnSyk/v6VQmIAAAAASUVORK5CYII="></img>
+      <img style="display:none" id="bi6ybeefast/mainplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVEhL7Y3RDkIhDEP5/5/Gjc5aGTKjuYkmnIel7QZt/WJOQckpKPGC1i6seVlgIQi/Yr8FcwG1/z2ANcIPmEBs8Au9mx7bzAmswQQwBGERhUmPs8g3nGrJYweQGtQQkwW6Wh4YsSORyhF0TihsAg0JVvOOoYqxcaYQk2T75Ikv7qt8g60BzZmFzfAbljf+kl8MNAduke7htaKhakPt5wVv8hsF33AKSk5BySko+feC3m/Jb6LqGW1TsgAAAABJRU5ErkJggg=="></img>
+      <img style="display:none" id="bi6ybeefast/easyplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxtKCnZusQCZnY/i57zt35qoAKqIAKqIAKqIAKqIAK6HOw8wC78Hw9Xl1J9AAAAABJRU5ErkJggg=="></img>>
+     <img style="display:none" id="bi6ybeefast/hardplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxhHSsf2d4QMJPbLnLnnNnvxIkQRIkQRIkQRIkQRIkQfoczD4cGLQ9QOmZGwAAAABJRU5ErkJggg=="></img>>
+    </div>
+    
+  </body>
+
+
+
+</html>
