@@ -152,6 +152,38 @@
                 return false
             }
           }();
+            gamecanvas.addEventListener('mousedown', function(event) {
+            var x = event.clientX - gamecanvas.getBoundingClientRect().left;
+            var y = event.clientY - gamecanvas.getBoundingClientRect().top;
+
+            // Rozměry plátna
+            var gamecanvasWidth = parseInt(getComputedStyle(gamecanvas).width);
+            var gamecanvasHeight = parseInt(getComputedStyle(gamecanvas).height);
+
+            // Výpočet procentuální pozice
+            var percentX = (x / gamecanvasWidth) * 160;
+            var percentY = (y / gamecanvasHeight) * 90;
+
+            // Výpis výsledků do konzole
+            console.log('Procentuální pozice X: ' + percentX.toFixed(2) + '%');
+            console.log('Procentuální pozice Y: ' + percentY.toFixed(2) + '%');
+            
+            uspesnaDetekce(percentX, percentY);
+            
+        });
+        
+        
+      var gamecanvasRect = gamecanvas.getBoundingClientRect();
+      function uspesnaDetekce(x, y) {
+        let minX = 20;
+        let maxX = 140;
+        let minY = 25;
+        let maxY = 35;
+		console.log(minX,minY,maxX,maxY,x,y);
+        if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
+          console.log('cervena');
+        }
+     }
   
           
           
@@ -168,6 +200,15 @@
                 m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
   			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
                 m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
+                
+                
+                
+                
+                
+                
+                
+                
+                
               } else if (game_dir_way=="game") {
                 m3jeng.relativerectfill(0,0,160,90,"#050510");
                 m3jeng.relativerectfill(6.5,20,153.5,90,"#050505");
@@ -246,4 +287,4 @@
 
 
 
-</html>
+</htm
