@@ -27,7 +27,8 @@
           let drawcanvas = gamecanvas.getContext("2d");                     //Vrátí plátno na které můžeme kreslit
           drawcanvas.imageSmoothingEnabled=false;
   
-          
+          let typelist=[[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0]]
+	  let infolist = {} //bude se do něj přidávat asi takto: "x,y" = [zbyvajici cas, maximalni cas, barva, pismeno]
           const m3jeng = new class  {
             constructor() {}
             relativepos(rx,ry) {                             
@@ -144,6 +145,12 @@
                     return "miss";
                 }
             }
+            isrealhexpos(x,y) {
+            	if ((x>-1)&&(x<10)&&(y>-1)&&(y<5)&&((x%2==0)||(y<4))) {
+                	return true
+                }
+                return false
+            }
           }();
   
           
@@ -167,11 +174,17 @@
                 for (let x=0; x<10; x++) {
 					        for (let y=0; y<5; y++) {
                     if ((x%2==0)||(y<4)) {
-                      m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
+                      if (typelist[x][y]==0) {
+                      	m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
+                      } else {
+                      	
+                      	m3jeng.relativehexdraw(x,y,Array(6).fill(infolist[typelist[x][y]][2]));
+                      }
                     }
                   }
               	}
               }
+              
   
   
   
