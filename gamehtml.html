@@ -211,12 +211,12 @@
                 
               } else if (game_dir_way=="game") {
                 m3jeng.relativerectfill(0,0,160,90,"#050510");
-                m3jeng.relativerectfill(6.5,20,153.5,90,"#050505");
+                m3jeng.relativeimage(document.getElementById(idhead+"hexbackground"),6.5,20,153.5,90);
                 for (let x=0; x<10; x++) {
 					        for (let y=0; y<5; y++) {
                     if ((x%2==0)||(y<4)) {
                       if (typelist[x][y]==0) {
-                      	m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
+                      	//m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
                       } else {
                       	
                       	m3jeng.relativehexdraw(x,y,Array(6).fill(infolist[typelist[x][y]][2]));
@@ -253,7 +253,7 @@
           requestAnimationFrame(update);
           
         
-          let imgpaths = ["menubackground","settingsbutton","mainplaybutton","easyplaybutton","hardplaybutton"];
+          let imgpaths = ["menubackground","settingsbutton","mainplaybutton","easyplaybutton","hardplaybutton","hexbackground"];
           function getprogress(f) {
             let lcount=0;
             let acount = imgpaths.length;
@@ -281,10 +281,11 @@
       <img style="display:none" id="bi6ybeefast/mainplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVEhL7Y3RDkIhDEP5/5/Gjc5aGTKjuYkmnIel7QZt/WJOQckpKPGC1i6seVlgIQi/Yr8FcwG1/z2ANcIPmEBs8Au9mx7bzAmswQQwBGERhUmPs8g3nGrJYweQGtQQkwW6Wh4YsSORyhF0TihsAg0JVvOOoYqxcaYQk2T75Ikv7qt8g60BzZmFzfAbljf+kl8MNAduke7htaKhakPt5wVv8hsF33AKSk5BySko+feC3m/Jb6LqGW1TsgAAAABJRU5ErkJggg=="></img>
       <img style="display:none" id="bi6ybeefast/easyplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxtKCnZusQCZnY/i57zt35qoAKqIAKqIAKqIAKqIAK6HOw8wC78Hw9Xl1J9AAAAABJRU5ErkJggg=="></img>>
      <img style="display:none" id="bi6ybeefast/hardplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxhHSsf2d4QMJPbLnLnnNnvxIkQRIkQRIkQRIkQRIkQfoczD4cGLQ9QOmZGwAAAABJRU5ErkJggg=="></img>>
+     <img style="display:none" id="bi6ybeefast/hexbackground" src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAKCAYAAABblxXYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVDhPYwCC//8/MfynJs0IYjDyAZlUAkDzGBhBNIRLPcAEMpmaYNSlQ9Gl1KMZGAALpVJQk5E8nQAAAABJRU5ErkJggg=="></img>
     </div>
     
   </body>
 
 
 
-</htm
+</html>
