@@ -151,7 +151,17 @@
                 }
                 return false
             }
-          }();
+          
+          
+          isnitbutton(){
+          	if (x >= minX && x <= maxX && y >= minY && y <= maxY){
+            	return true
+            }
+            return false
+          
+          }
+        }();  
+          
             gamecanvas.addEventListener('mousedown', function(event) {
             var x = event.clientX - gamecanvas.getBoundingClientRect().left;
             var y = event.clientY - gamecanvas.getBoundingClientRect().top;
@@ -168,23 +178,18 @@
             console.log('Procentuální pozice X: ' + percentX.toFixed(2) + '%');
             console.log('Procentuální pozice Y: ' + percentY.toFixed(2) + '%');
             
-            uspesnaDetekce(percentX, percentY);
+           if (isnibutton(percentX, percentY,20,25,140,35)){
+           		game_dir_way="game";
+           }
             
+		
         });
         
         
-      var gamecanvasRect = gamecanvas.getBoundingClientRect();
-      function uspesnaDetekce(x, y) {
-        let minX = 20;
-        let maxX = 140;
-        let minY = 25;
-        let maxY = 35;
-		console.log(minX,minY,maxX,maxY,x,y);
-        if (x >= minX && x <= maxX && y >= minY && y <= maxY) {
-          console.log('cervena');
-        }
-     }
-  
+     
+        
+    
+
           
           
           let game_dir_way="main_menu";
@@ -197,9 +202,9 @@
               if (game_dir_way=="main_menu") {
                 m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
                 m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
-                m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,25,140,35);	//horni
-  			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,55,140,65);	//spodni
-                m3jeng.relativeimage(document.getElementById(idhead+"mainplaybutton"),20,40,140,50); //prostredni
+                m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,20,140,40);	//horni
+  			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,50,140,70);	//spodni
+                
                 
                 
                 
@@ -253,7 +258,7 @@
           requestAnimationFrame(update);
           
         
-          let imgpaths = ["menubackground","settingsbutton","mainplaybutton","easyplaybutton","hardplaybutton","hexbackground"];
+          let imgpaths = ["menubackground","settingsbutton","easyplaybutton","hardplaybutton","hexbackground"];
           function getprogress(f) {
             let lcount=0;
             let acount = imgpaths.length;
@@ -278,7 +283,7 @@
       </script>
       <img style="display:none" id="bi6ybeefast/menubackground" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAkCAIAAAC2bqvFAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGISURBVFhH7ZhBlsIgDIaLa6s3mWPMwgvMGecCs/AY3mTs7DEYWiOlAQJI+8ZvUVPfM+TPT6ja6WsHbPeqTKS1CbfIoHaoY6OoQ4QD6vvPRj70195GTRiUMg70fgFYOlMir41SSacC4GXJAVrfo4JBLQlmcKQW08M7QJkqyF/b3xcRAQfmcI0UOZNLvAMeoGKQ9DMU2w/pJDvw4F49AhowaKBE7gARYLhncOak4NgsUcYBYDLBS0VnkhzAjupTb/b9qcc3LdLxdU6FObz4BAds9TSdc+yMt8GaKEFzAvsw0gGmJjTE3uQRaPa8g/BmpAO0Dd5ERWDaRHlaWnwKOYvV0BNDwgzweJv3ClVZT2KWmP2Qr7CYAzKoSKGYeg4kgUoEGsCAHfwqc4hxfyVA9/0OvGwoxb1HEmagki25TVnJDIhpfAoV4F/8L7Rq3g48cbx82kjE78fZRvFknkJOxZIKRmSpuFOoQTtHpqXDSRgHIMv0+YSMI5n6keBy7+dAa+w3UdSwyeu1uwGk3nclKIPuUwAAAABJRU5ErkJggg=="></img>
       <img style="display:none" id="bi6ybeefast/settingsbutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACKSURBVDhPxZNRDoAgDEOHp4QTckylgylgIYofvsQw3NpsoE5E9vQsowaJvHuJc062Ei9zGoQQSnTB3vU0HcwEyLH8aRBj1HXWidXU3A5x1AUVp0OktwCTWsBMkYcBgEGD975EmX5vQPt5BPodWHG9wpiZP75GM2M1Ok+PzT2aH0D7/7+gHeRwBZEDnSyk/v6VQmIAAAAASUVORK5CYII="></img>
-      <img style="display:none" id="bi6ybeefast/mainplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACzSURBVEhL7Y3RDkIhDEP5/5/Gjc5aGTKjuYkmnIel7QZt/WJOQckpKPGC1i6seVlgIQi/Yr8FcwG1/z2ANcIPmEBs8Au9mx7bzAmswQQwBGERhUmPs8g3nGrJYweQGtQQkwW6Wh4YsSORyhF0TihsAg0JVvOOoYqxcaYQk2T75Ikv7qt8g60BzZmFzfAbljf+kl8MNAduke7htaKhakPt5wVv8hsF33AKSk5BySko+feC3m/Jb6LqGW1TsgAAAABJRU5ErkJggg=="></img>
+      
       <img style="display:none" id="bi6ybeefast/easyplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxtKCnZusQCZnY/i57zt35qoAKqIAKqIAKqIAKqIAK6HOw8wC78Hw9Xl1J9AAAAABJRU5ErkJggg=="></img>>
      <img style="display:none" id="bi6ybeefast/hardplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxhHSsf2d4QMJPbLnLnnNnvxIkQRIkQRIkQRIkQRIkQfoczD4cGLQ9QOmZGwAAAABJRU5ErkJggg=="></img>>
      <img style="display:none" id="bi6ybeefast/hexbackground" src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAKCAYAAABblxXYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVDhPYwCC//8/MfynJs0IYjDyAZlUAkDzGBhBNIRLPcAEMpmaYNSlQ9Gl1KMZGAALpVJQk5E8nQAAAABJRU5ErkJggg=="></img>
