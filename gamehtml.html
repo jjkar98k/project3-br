@@ -92,6 +92,7 @@
                     this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
                 }
             }
+            
             gethexbypos(rx, ry) {
                 let yoffset = 10;
                 let ix = rx - 6.5;
@@ -151,15 +152,80 @@
                 }
                 return false
             }
-          
-          
-          isinbutton(x,y,minX,minY,maxX,maxY){
-          	if (x >= minX && x <= maxX && y >= minY && y <= maxY){
-            	return true
+            hexmatdraw() {
+              for (let x=0; x<10; x++) {
+				for (let y=0; y<5; y++) {
+                    if ((x%2==0)||(y<4)) {
+                      let htype = typelist[x][y]
+                      if (htype!=0) {
+                        let xoffset = 6.5;
+                        let yoffset = 20;
+                        let bx;
+                        let by;
+                        let ycof=0; //udává yoffset sousedů
+            	        if (this.mathmod(x, 2)==0) {
+                	      bx = xoffset+x*14;
+                          by = yoffset+y*14;
+                          ycof=-1;
+                        } else {
+                	      bx = xoffset+x*14;
+                          by = yoffset+y*14+7;
+                        }
+                        if (this.isrealhexpos(x-1,y+ycof)) {
+                          if (typelist[x-1][y+ycof]!=htype) {
+                            this.relativeline(bx+0.25, by+7, bx+7, by+0.25, infolist[htype][2],0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+0.25, by+7, bx+7, by+0.25, infolist[htype][2],0.5);
+                        }
+                        if (this.isrealhexpos(x,y-1)) {
+                          if (typelist[x][y-1]!=htype) {
+                            this.relativeline(bx+7, by+0.25, bx+14, by+0.25, infolist[htype][2],0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+7, by+0.25, bx+14, by+0.25, infolist[htype][2],0.5);
+                        }
+                        if (this.isrealhexpos(x+1,y+ycof)) {
+                          if (typelist[x+1][y+ycof]!=htype) {
+                            this.relativeline(bx+14, by+0.25, bx+20.75, by+7, infolist[htype][2],0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+14, by+0.25, bx+20.75, by+7, infolist[htype][2],0.5);
+                        }
+                        if (this.isrealhexpos(x+1,y+1+ycof)) {
+                          if (typelist[x+1][y+1+ycof]!=htype) {
+                            this.relativeline(bx+20.75,by+7,bx+14,by+13.75, infolist[htype][2], 0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+20.75,by+7,bx+14,by+13.75, infolist[htype][2], 0.5);
+                        }
+                        if (this.isrealhexpos(x,y+1)) {
+                          if (typelist[x][y+1]!=htype) {
+                            this.relativeline(bx+14,by+13.75,bx+7,by+13.75, infolist[htype][2], 0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+14,by+13.75,bx+7,by+13.75, infolist[htype][2], 0.5);
+                        }
+                        if (this.isrealhexpos(x-1,y+1+ycof)) {
+                          if (typelist[x-1][y+1+ycof]!=htype) {
+                            this.relativeline(bx+7,by+13.75,bx+0.25,by+7, infolist[htype][2], 0.5);
+                          }
+                        } else {
+                          this.relativeline(bx+7,by+13.75,bx+0.25,by+7, infolist[htype][2], 0.5);
+                        } 
+                      }
+                    }
+                  }
+              	}
             }
-            return false
           
-          }
+            isinbutton(x,y,minX,minY,maxX,maxY){
+          	  if (x >= minX && x <= maxX && y >= minY && y <= maxY){
+            	return true
+              }
+              return false
+          
+            }
         }();  
           
             gamecanvas.addEventListener('mousedown', function(event) {
@@ -224,18 +290,7 @@
               } else if (game_dir_way=="game") {
                 m3jeng.relativerectfill(0,0,160,90,"#050510");
                 m3jeng.relativeimage(document.getElementById(idhead+"hexbackground"),6.5,20,153.5,90);
-                for (let x=0; x<10; x++) {
-					        for (let y=0; y<5; y++) {
-                    if ((x%2==0)||(y<4)) {
-                      if (typelist[x][y]==0) {
-                      	//m3jeng.relativehexdraw(x,y,Array(6).fill("#888"));
-                      } else {
-                      	
-                      	m3jeng.relativehexdraw(x,y,Array(6).fill(infolist[typelist[x][y]][2]));
-                      }
-                    }
-                  }
-              	}
+                m3jeng.hexmatdraw()
               }
               
   
