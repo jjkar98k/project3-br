@@ -28,14 +28,42 @@
           drawcanvas.imageSmoothingEnabled=false;
   
           let typelist=[[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0]]
-	  let infolist = {} //bude se do něj přidávat asi takto: "x,y" = [zbyvajici cas, maximalni cas, barva, pismeno]
-          const m3jeng = new class  {
-            constructor() {}
+
+          
+          
+          
+	  	  let infolist = {} //bude se do něj přidávat asi takto: "x,y" = [zbyvajici cas, maximalni cas, barva, pismeno]
+            
+            
+          const m3jeng = new class  { //hlavni trida m3j
+            constructor() {} //constructor nepotrebna vec
+            
+            
+            
+             filterZeros(typelist) {
+  
+    			let resultArray = [];
+
+    
+    			for (let i = 0; i < typelist.length; i++) {
+      
+      		if (typelist[i] === 0) {
+        		resultArray.push(`${i},${typelist[i]}`);
+      		}
+    	}
+
+    
+    		return resultArray;
+  		}
+
+            
+            
+            
             relativepos(rx,ry) {                             
-              return [rx*drawcanvas.canvas.width/160, ry*drawcanvas.canvas.height/90];    
+              return [rx*drawcanvas.canvas.width/160, ry*drawcanvas.canvas.height/90];    //relativni pos
             }
             relativerect(rsx,rsy,rex,rey) { 
-              return [rsx*drawcanvas.canvas.width/160, rsy*drawcanvas.canvas.height/90, (rex-rsx)*drawcanvas.canvas.width/160, (rey-rsy)*drawcanvas.canvas.height/90];
+              return [rsx*drawcanvas.canvas.width/160, rsy*drawcanvas.canvas.height/90, (rex-rsx)*drawcanvas.canvas.width/160, (rey-rsy)*drawcanvas.canvas.height/90]; 
                                                                               
             }
             relativeimage(img, rsx, rsy, rex, rey) {
@@ -54,18 +82,18 @@
                 let [oex, oey] = this.relativepos(rex, rey);
             	  drawcanvas.beginPath();
                 drawcanvas.strokeStyle=hexcolor;
-                drawcanvas.lineWidth= linewidth*drawcanvas.canvas.width/160
+                drawcanvas.lineWidth= linewidth*drawcanvas.canvas.width/160  //relativ pos konec
                 drawcanvas.moveTo(osx, osy);
                 drawcanvas.lineTo(oex, oey);
                 drawcanvas.stroke();
             }
             rgbtohex(r, g, b) {
               let htr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
-              return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];
+              return "#" + htr[Math.floor(r / 16)] + htr[r % 16] + htr[Math.floor(g / 16)] + htr[g % 16] + htr[Math.floor(b / 16)] + htr[b % 16];  //generovani 6uhelniku
             }
             mathmod(a,b) {
               if ((a%b)>=0){
-                  return a%b
+                  return a%b			//matika pro 6u
               }
               return b+(a%b)
             }
@@ -79,7 +107,7 @@
                     this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
                     this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
                     this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
-                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
+                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);  ////generovani 6u
                     this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
                 } else {
                 	let bx = xoffset+cx*14
