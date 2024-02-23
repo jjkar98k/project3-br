@@ -32,7 +32,7 @@
           
           
           
-	  	  let infolist = {} //bude se do něj přidávat asi takto: "x,y" = [zbyvajici cas, maximalni cas, barva, pismeno]
+	  let infolist = {} //bude se do něj přidávat asi takto: "x,y" = [zbyvajici cas, maximalni cas, barva, pismeno]
             
             
           const m3jeng = new class  { //hlavni trida m3j
@@ -41,21 +41,16 @@
             
             
              filterZeros(typelist) {
-  
-    			let resultArray = [];
-
-    
-    			for (let x = 0;x<10;x++) {
-      				for (let y = 0; y<5;y++) {
-                    
-            if ((x%2==0)||(y<4)) {
-                      let htype = typelist[x][y];        
-      		if (typelist[x][y] === 0) {            
+    		let resultArray = [];
+    		  for (let x = 0;x<10;x++) {
+      	            for (let y = 0; y<5;y++) {
+                     if ((x%2==0)||(y<4)) {   
+      		       if (typelist[x][y] === 0) {            
         		resultArray.push(String(x)+String(y));
-      		}
-    	}
-	   }
-    }
+      		       }
+    	            }
+	          }
+                }
     		return resultArray;
   		}
 
@@ -100,29 +95,7 @@
               }
               return b+(a%b)
             }
-            relativehexdraw(cx, cy, colors) {
-            	let xoffset = 6.5;
-                let yoffset = 20;
-            	if (this.mathmod(cx, 2)==0) {
-                	let bx = xoffset+cx*14
-                    let by = yoffset+cy*14
-                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
-                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
-                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
-                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
-                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);  ////generovani 6u
-                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
-                } else {
-                	let bx = xoffset+cx*14
-                    let by = yoffset+cy*14+7
-                	this.relativeline(bx+0.25, by+7, bx+7, by+0.25, colors[0],0.5);
-                    this.relativeline(bx+7, by+0.25, bx+14, by+0.25, colors[1],0.5);
-                    this.relativeline(bx+14, by+0.25, bx+20.75, by+7, colors[2],0.5);
-                    this.relativeline(bx+20.75,by+7,bx+14,by+13.75, colors[3], 0.5);
-                    this.relativeline(bx+14,by+13.75,bx+7,by+13.75, colors[4], 0.5);
-                    this.relativeline(bx+7,by+13.75,bx+0.25,by+7, colors[5], 0.5);
-                }
-            }
+            
             
             gethexbypos(rx, ry) {
                 let yoffset = 10;
@@ -194,6 +167,15 @@
                         let bx;
                         let by;
                         let ycof=0; //udává yoffset sousedů
+                        let cellcolor ="#000";
+                        if (infolist[htype][0]>0) {
+                          cellcolor = this.rgbtohex(infolist[htype][2][0],infolist[htype][2][1],infolist[htype][2][2]);
+                        } else {
+                          let bm = Math.min(Math.max(1-(infolist[htype][0]/-100),0),1);
+                         
+                          cellcolor = this.rgbtohex(Math.ceil(infolist[htype][2][0]*bm),Math.ceil(infolist[htype][2][1]*bm),Math.ceil(infolist[htype][2][2]*bm));
+                        }
+                        
             	        if (this.mathmod(x, 2)==0) {
                 	      bx = xoffset+x*14;
                           by = yoffset+y*14;
@@ -204,45 +186,45 @@
                         }
                         if (this.isrealhexpos(x-1,y+ycof)) {
                           if (typelist[x-1][y+ycof]!=htype) {
-                            this.relativeline(bx+0.25, by+7, bx+7, by+0.25, infolist[htype][2],0.5);
+                            this.relativeline(bx+0.25, by+7, bx+7, by+0.25, cellcolor,0.5);
                           }
                         } else {
-                          this.relativeline(bx+0.25, by+7, bx+7, by+0.25, infolist[htype][2],0.5);
+                          this.relativeline(bx+0.25, by+7, bx+7, by+0.25, cellcolor,0.5);
                         }
                         if (this.isrealhexpos(x,y-1)) {
                           if (typelist[x][y-1]!=htype) {
-                            this.relativeline(bx+7, by+0.25, bx+14, by+0.25, infolist[htype][2],0.5);
+                            this.relativeline(bx+7, by+0.25, bx+14, by+0.25, cellcolor,0.5);
                           }
                         } else {
-                          this.relativeline(bx+7, by+0.25, bx+14, by+0.25, infolist[htype][2],0.5);
+                          this.relativeline(bx+7, by+0.25, bx+14, by+0.25, cellcolor,0.5);
                         }
                         if (this.isrealhexpos(x+1,y+ycof)) {
                           if (typelist[x+1][y+ycof]!=htype) {
-                            this.relativeline(bx+14, by+0.25, bx+20.75, by+7, infolist[htype][2],0.5);
+                            this.relativeline(bx+14, by+0.25, bx+20.75, by+7, cellcolor,0.5);
                           }
                         } else {
-                          this.relativeline(bx+14, by+0.25, bx+20.75, by+7, infolist[htype][2],0.5);
+                          this.relativeline(bx+14, by+0.25, bx+20.75, by+7, cellcolor,0.5);
                         }
                         if (this.isrealhexpos(x+1,y+1+ycof)) {
                           if (typelist[x+1][y+1+ycof]!=htype) {
-                            this.relativeline(bx+20.75,by+7,bx+14,by+13.75, infolist[htype][2], 0.5);
+                            this.relativeline(bx+20.75,by+7,bx+14,by+13.75, cellcolor, 0.5);
                           }
                         } else {
-                          this.relativeline(bx+20.75,by+7,bx+14,by+13.75, infolist[htype][2], 0.5);
+                          this.relativeline(bx+20.75,by+7,bx+14,by+13.75, cellcolor, 0.5);
                         }
                         if (this.isrealhexpos(x,y+1)) {
                           if (typelist[x][y+1]!=htype) {
-                            this.relativeline(bx+14,by+13.75,bx+7,by+13.75, infolist[htype][2], 0.5);
+                            this.relativeline(bx+14,by+13.75,bx+7,by+13.75, cellcolor, 0.5);
                           }
                         } else {
-                          this.relativeline(bx+14,by+13.75,bx+7,by+13.75, infolist[htype][2], 0.5);
+                          this.relativeline(bx+14,by+13.75,bx+7,by+13.75, cellcolor, 0.5);
                         }
                         if (this.isrealhexpos(x-1,y+1+ycof)) {
                           if (typelist[x-1][y+1+ycof]!=htype) {
-                            this.relativeline(bx+7,by+13.75,bx+0.25,by+7, infolist[htype][2], 0.5);
+                            this.relativeline(bx+7,by+13.75,bx+0.25,by+7, cellcolor, 0.5);
                           }
                         } else {
-                          this.relativeline(bx+7,by+13.75,bx+0.25,by+7, infolist[htype][2], 0.5);
+                          this.relativeline(bx+7,by+13.75,bx+0.25,by+7, cellcolor, 0.5);
                         } 
                       }
                     }
@@ -297,6 +279,7 @@
           let game_type="easy";
           let game_dir_way="main_menu";
           let startmenua=false;
+          let lasttimestamp = 0;
           function update(atime) { //toto se bude volat co nejčastěji to půjde
             drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
             m3jeng.relativerectfill(0,0,160,90,"#fff")
@@ -306,7 +289,7 @@
                 m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
                 m3jeng.relativeimage(document.getElementById(idhead+"settingsbutton"),145,75,160,90);
                 m3jeng.relativeimage(document.getElementById(idhead+"hardplaybutton"),20,20,140,40);	//horni
-  			        m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,50,140,70);	//spodni
+  			    m3jeng.relativeimage(document.getElementById(idhead+"easyplaybutton"),20,50,140,70);	//spodni
                 
                 
                 
@@ -346,6 +329,7 @@
                 m3jeng.relativerectfill(61,51,61+loadedimgsprogress*38,53,"#0f0");
               }
             }
+            lasttimestamp=atime;
             requestAnimationFrame(update);
           }
           requestAnimationFrame(update);
