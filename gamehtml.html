@@ -283,7 +283,7 @@
           function update(atime) { //toto se bude volat co nejčastěji to půjde
             drawcanvas.clearRect(0,0,drawcanvas.width,drawcanvas.height);
             m3jeng.relativerectfill(0,0,160,90,"#fff")
-            
+            let timedif = atime-lasttimestamp;
             if (loadedimgs) {
               if (game_dir_way=="main_menu") {
                 m3jeng.relativeimage(document.getElementById(idhead+"menubackground"),0,0,160,90);
@@ -304,6 +304,10 @@
               } else if (game_dir_way=="game") {
                 m3jeng.relativerectfill(0,0,160,90,"#050510");
                 m3jeng.relativeimage(document.getElementById(idhead+"hexbackground"),6.5,20,153.5,90);
+                for (let key in infolist) {
+                  infolist[key][0]+=timedif;
+            
+                }
                 m3jeng.hexmatdraw()
               }
               
@@ -363,7 +367,7 @@
       <img style="display:none" id="bi6ybeefast/game_instructions" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAJCAYAAAA7KqwyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABVSURBVChTrZFBCsAgDATT/jF5ZD7ZMkLLVsWCOgdxIc4GPNz9sgVOjswsYYbPBogi4hXqHcg1zQaPRCH3HkMRKL1BpFqiNIKaUTv8CkbtsOcb5zG7AS2BIwi9uD/AAAAAAElFTkSuQmCC"></img>
       <img style="display:none" id="bi6ybeefast/easyplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxtKCnZusQCZnY/i57zt35qoAKqIAKqIAKqIAKqIAK6HOw8wC78Hw9Xl1J9AAAAABJRU5ErkJggg=="></img>>
      <img style="display:none" id="bi6ybeefast/hardplaybutton" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVEhL7c0xEQAgDAAxhHSsf2d4QMJPbLnLnnNnvxIkQRIkQRIkQRIkQRIkQfoczD4cGLQ9QOmZGwAAAABJRU5ErkJggg=="></img>>
-     <img style="display:none" id="bi6ybeefast/hexbackground" src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAKCAYAAABblxXYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAySURBVDhPYwCC//8/MfynJs0IYjDyAZlUAkDzGBhBNIRLPcAEMpmaYNSlQ9Gl1KMZGAALpVJQk5E8nQAAAABJRU5ErkJggg=="></img>
+     <img style="display:none" id="bi6ybeefast/hexbackground" src="./hexmatbgrd.png"></img>
     </div>
     
   </body>
